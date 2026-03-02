@@ -1,0 +1,47 @@
+[
+    {
+      "id": 1,
+      "doctorImage": "/src/assets/doc.png",
+      "name": "Dr. Ayesha Rahman",
+      "education": "MBBS, FCPS (Medicine)",
+      "speciality": "Internal Medicine",
+      "experience": "8 Years",
+      "registrationNumber": "BMDC-45678"
+    },
+    {
+      "id": 2,
+      "doctorImage":  "/src/assets/doc.png",
+      "name": "Dr. Mahmud Hasan",
+      "education": "MBBS, MS (Cardiology)",
+      "speciality": "Cardiologist",
+      "experience": "12 Years",
+      "registrationNumber": "BMDC-38921"
+    },
+    {
+      "id": 3,
+      "doctorImage":  "/src/assets/doc.png",
+      "name": "Dr. Nusrat Jahan",
+      "education": "MBBS, DGO",
+      "speciality": "Gynecologist",
+      "experience": "6 Years",
+      "registrationNumber": "BMDC-47210"
+    },
+    {
+      "id": 4,
+      "doctorImage":  "/src/assets/doc.png",
+      "name": "Dr. Tanvir Ahmed",
+      "education": "MBBS, MS (Orthopedics)",
+      "speciality": "Orthopedic Surgeon",
+      "experience": "10 Years",
+      "registrationNumber": "BMDC-50123"
+    },
+    {
+      "id": 5,
+      "doctorImage":  "/src/assets/doc.png",
+      "name": "Dr. Farhana Islam",
+      "education": "MBBS, MD (Dermatology)",
+      "speciality": "Dermatologist",
+      "experience": "7 Years",
+      "registrationNumber": "BMDC-41876"
+    }
+  ]
