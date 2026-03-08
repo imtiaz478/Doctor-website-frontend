@@ -8,6 +8,21 @@ const DoctorDetails = ({doctors}) => {
         return <div className=' text-center text-2xl mt-10'>Doctor not found</div>;
     }
 
+    const handleBooking = () => {
+        const storedBookings = JSON.parse(localStorage.getItem('appointments')) || [];
+
+        const alreadyBooked = storedBookings.find((item) => item.id === doctor.id);
+
+        if(alreadyBooked){
+            alert('You have already booked an appointment with this doctor.');
+            return;
+        }
+
+        storedBookings.push(doctor);
+        localStorage.setItem('appointments', JSON.stringify(storedBookings));   
+        alert('Appointment booked successfully!');
+    }
+
     const {
         doctorImage,
         name,
@@ -41,7 +56,7 @@ const DoctorDetails = ({doctors}) => {
                     <p className=' font-bold text-2xl my-3'>Availability</p>
                     <p className=' font-bold text-xl bg-[#8ac69a] p-3 rounded-full'>Doctors Available Today</p>
                 </div>
-                <button className=' bg-blue-600 text-white rounded-full w-full p-1.5 my-2 '>Book Appointment Now</button>
+                <button className=' bg-blue-600 text-white rounded-full w-full p-1.5 my-2 ' onClick={handleBooking}>Book Appointment Now</button>
             </div>
         </div>
     );

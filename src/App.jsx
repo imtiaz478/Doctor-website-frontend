@@ -7,6 +7,7 @@ import Navbar from "./component/Navbar/Navbar"
 import { useEffect, useState } from "react";
 import Doctor from "./component/Doctor/Doctor";
 import DoctorDetails from "./component/DoctorDetails/DoctorDetails";
+import BookingPage from "./component/BookingPage/BookingPage";
 
 function App() {
   const [doctors, setDoctors] = useState([]);
@@ -37,7 +38,10 @@ function App() {
         <Route path="/doctor/:id" element={
           <DoctorDetails doctors={doctors} />
         } />
+        <Route path="/bookings" element={<BookingPage></BookingPage>}></Route>
       </Routes>
+
+
    
     </div>
     <Footer></Footer>
