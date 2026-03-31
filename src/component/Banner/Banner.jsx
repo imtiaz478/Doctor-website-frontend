@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const Banner = () => {
     return (
         <div className=' my-20 space-y-5 bg-white py-10 px-5 rounded-lg shadow-sm w-4/5 mx-auto'>
+            <Helmet>
+                <title>Banner</title>
+            </Helmet>
             <h1 className=' text-center text-4xl font-bold'>Dependable Care, Backed by Trusted 
                <br /> Professionals.</h1>
             <p className=' text-center'>Our platform connects you with verified, experienced doctors across various specialties — all at your convenience. Whether it's a <br /> routine checkup or urgent consultation, book appointments in minutes and receive quality care you can trust.</p>

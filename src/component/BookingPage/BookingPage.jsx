@@ -1,21 +1,18 @@
 import React, {useEffect, useState} from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-
+import { getMyAppointments, cancelAppointment } from '../../api';
 const BookingPage = () => {
     const [appointments, setAppointments] = useState([]);   
 
     useEffect(() => {
-        const storedAppointments = JSON.parse(localStorage.getItem('appointments')) || [];
-        setAppointments(storedAppointments);
-    },[]);
+        getMyAppointments().then(data => setAppointments(data));
+    }, []);
 
-    const handleCancel = (id) => {
-        const updated = appointments.filter(app => app.id !== id);
-
-        setAppointments(updated);
-
-        localStorage.setItem('appointments', JSON.stringify(updated));
-    }
+    const handleCancel = async (id) => {
+        await cancelAppointment(id);
+        setAppointments(prev => prev.filter(app => app.id !== id));
+    };
 
     if(appointments.length === 0){
         return (
@@ -31,6 +28,7 @@ const BookingPage = () => {
         );
     }
     return (
+        
         <div>
             <div className="w-3/4 mx-auto mt-10 space-y-6">
 
@@ -39,16 +37,14 @@ const BookingPage = () => {
 {appointments.map((doc) => (
 
     <div
-        key={doc.id}
+        key={doc.doctorId}
         className="bg-white p-6 rounded-lg shadow flex justify-between items-center"
     >
 
         <div>
-            <h2 className="text-2xl font-bold">{doc.name}</h2>
+            <h2 className="text-2xl font-bold">{doc.userName}</h2>
 
-            <p className="text-gray-500">
-                {doc.education}
-            </p>
+           
 
             <p className="text-gray-500">
                 {doc.speciality}

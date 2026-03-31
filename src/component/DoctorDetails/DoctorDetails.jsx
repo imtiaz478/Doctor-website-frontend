@@ -1,5 +1,7 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
+import { bookAppointment } from '../../api';
 const DoctorDetails = ({doctors}) => {
     const {id} = useParams();
     const doctor = doctors.find(doc => doc.id === parseInt(id));
@@ -8,20 +10,15 @@ const DoctorDetails = ({doctors}) => {
         return <div className=' text-center text-2xl mt-10'>Doctor not found</div>;
     }
 
-    const handleBooking = () => {
-        const storedBookings = JSON.parse(localStorage.getItem('appointments')) || [];
-
-        const alreadyBooked = storedBookings.find((item) => item.id === doctor.id);
-
-        if(alreadyBooked){
-            alert('You have already booked an appointment with this doctor.');
-            return;
+    const handleBooking = async () => {
+        try{
+            await bookAppointment(doctor.id);
+            alert('Appointment booked successfully!');
         }
-
-        storedBookings.push(doctor);
-        localStorage.setItem('appointments', JSON.stringify(storedBookings));   
-        alert('Appointment booked successfully!');
-    }
+        catch{
+            alert('Could not book appointment. Please try again later.');
+        }
+    };
 
     const {
         doctorImage,
@@ -33,7 +30,11 @@ const DoctorDetails = ({doctors}) => {
         
       } = doctor;
     return (
+
         <div className=' p-10'>
+            <Helmet>
+                <title>Doctor Details</title>
+            </Helmet>
             <div className=' p-10 bg-white w-3/4 mx-auto my-10 rounded-lg shadow-sm'>
                 <h1 className=' text-3xl font-bold text-center'>Doctor's Profile Details</h1>
                 <p className=' text-gray-400 text-center'>Lorem ipsum dolor sit amet consectetur. Sit enim blandit orci tortor amet ut. Suscipit sed est fermentum magna. Quis vitae tempus <br /> facilisis turpis imperdiet mattis donec dignissim volutpat.</p>

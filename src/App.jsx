@@ -8,14 +8,16 @@ import { useEffect, useState } from "react";
 import Doctor from "./component/Doctor/Doctor";
 import DoctorDetails from "./component/DoctorDetails/DoctorDetails";
 import BookingPage from "./component/BookingPage/BookingPage";
+import { HelmetProvider } from "react-helmet-async";
+import { getDoctors } from "./api"; 
+import Login from "./LogIn/Login";
+import LandingPage from "./Pages/LandingPage";
 
 function App() {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    fetch("/doctorsData.json")
-      .then(res => res.json())
-      .then(data => setDoctors(data))
+    getDoctors().then(data => setDoctors(data));
   }, []);
 
 
@@ -23,28 +25,37 @@ function App() {
 
   return (
     <>
+    <HelmetProvider>
     <div className=" bg-gray-100">
-    <Navbar />
+      
+      
+  
+        <Routes>
+          <Route path="/home" element={
+            <>
+            <Navbar />
+              <Banner />
+              <Doctors doctors={doctors} />
+              <MixCards />
+            </>
+          } />
+  
+          <Route path="/doctor/:id" element={
+            <DoctorDetails doctors={doctors} />
+          } />
+          <Route path="/bookings" element={<BookingPage></BookingPage>}></Route>
 
-      <Routes>
-        <Route path="/" element={
-          <>
-            <Banner />
-            <Doctors doctors={doctors} />
-            <MixCards />
-          </>
-        } />
-
-        <Route path="/doctor/:id" element={
-          <DoctorDetails doctors={doctors} />
-        } />
-        <Route path="/bookings" element={<BookingPage></BookingPage>}></Route>
-      </Routes>
-
-
+          <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/" element={<LandingPage></LandingPage>}></Route>
+        </Routes>
+  
+  
+     
+      </div>
+      <Footer></Footer>
+        
+        </HelmetProvider>
    
-    </div>
-    <Footer></Footer>
    
     </>
   )
