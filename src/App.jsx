@@ -12,7 +12,10 @@ import { HelmetProvider } from "react-helmet-async";
 import { getDoctors } from "./api"; 
 import Login from "./LogIn/Login";
 import LandingPage from "./Pages/LandingPage";
-
+import CustomerDashboard from "./Pages/CustomerDashboard";
+import DoctorDashboard from "./Pages/DoctorDashboard";
+import AdminDashboard from "./Pages/AdminDashboard";
+import PrivateRoute from "./component/PrivateRoute";  
 function App() {
   const [doctors, setDoctors] = useState([]);
 
@@ -46,6 +49,21 @@ function App() {
           <Route path="/bookings" element={<BookingPage></BookingPage>}></Route>
 
           <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/dashboard/customer" element={
+            <PrivateRoute role="Customer">
+              <CustomerDashboard />
+            </PrivateRoute>
+          } />
+          <Route path="/dashboard/doctor" element={
+            <PrivateRoute role="Doctor">
+              <DoctorDashboard />
+            </PrivateRoute>
+          } />  
+          <Route path="/dashboard/admin" element={
+            <PrivateRoute role="Admin">
+              <AdminDashboard />
+            </PrivateRoute>
+          } />  
           <Route path="/" element={<LandingPage></LandingPage>}></Route>
         </Routes>
   
